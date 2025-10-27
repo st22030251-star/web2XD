@@ -168,7 +168,7 @@ app.get("/getallcards", async (req, res) => {
     try {
         const cards = await Card.find(req.body);
         return res.status(200).json({
-            message: "creada",
+            message: "success",
             data: cards
         });
     }
