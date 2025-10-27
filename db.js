@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const Mongo_Url = process.env.MONGO_URL || "mongodb://localhost:27017/thirdb";
+const Mongo_Url = process.env.MONGO_URL || "mongodb+srv://admin:KHbZy44xoHcsLUT0@cluster0.gmjypdy.mongodb.net/thirdb";
 export const connectDB = async () => {
     try {
         await mongoose.connect(Mongo_Url);
