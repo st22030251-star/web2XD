@@ -1,9 +1,11 @@
 import express from "express";
+import cors from 'cors';
 import { connectDB } from "./db.js";
 import { Card } from "./models/card.js";
 
 const app = express();
 connectDB();
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -168,7 +170,7 @@ app.get("/getallcards", async (req, res) => {
     try {
         const cards = await Card.find(req.body);
         return res.status(200).json({
-            message: "success",
+            message: "data",
             data: cards
         });
     }
