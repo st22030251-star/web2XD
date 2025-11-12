@@ -202,16 +202,17 @@ app.post("/base/create", async (req, res) => {
     }
 })
 
-app.get("/base/get/:id", async (req, res) => {
+app.get("base/getall", async (req, res) => {
     try {
-        const base = await baseModel.findById(req.params.id);
-        if (!base)
-            throw new Error("No existe la base con ese id");
-        return res.status(200).json(base);
+        const bases = await baseModel.find();
+        return res.status(200).json({
+            message: "data",
+            data: bases
+        });
     }
     catch (error) {
         console.error(error.message);
-        return res.status(404).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
 })
 
