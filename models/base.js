@@ -17,7 +17,7 @@ const baseSchema = new mongoose.Schema({
         trim: true
     },
     puntosextra: {
-        type: int,
+        type: String,
         required: true,
         trim: true
     }
