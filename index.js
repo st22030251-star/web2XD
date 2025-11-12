@@ -2,6 +2,7 @@ import express from "express";
 import cors from 'cors';
 import { connectDB } from "./db.js";
 import { Card } from "./models/card.js";
+import { baseModel } from "./models/base.js";
 
 const app = express();
 connectDB();
@@ -122,7 +123,7 @@ app.post("/createcard", async (req, res) => {
 
 app.get("/getcard/:id", async (req, res) => {
     try {
-        const card = await Card.findById(req.params.id );
+        const card = await Card.findById(req.params.id);
         if (!card)
             throw new Error("No existe la tarjeta con ese id");
         return res.status(200).json(card);
@@ -187,6 +188,32 @@ app.post("/send", async (req, res) => {
     console.log(password);
     res.status(200).send("Datos recibidos");
 });
+
+//############################################ database endpoints ###########################################
+
+app.post("/base/create", async (req, res) => {
+    try {
+        await baseModel.create(req.body);
+        return res.status(201).json({ message: "Base created" })
+    }
+    catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ error: error.message });
+    }
+})
+
+app.get("/base/get/:id", async (req, res) => {
+    try {
+        const base = await baseModel.findById(req.params.id);
+        if (!base)
+            throw new Error("No existe la base con ese id");
+        return res.status(200).json(base);
+    }
+    catch (error) {
+        console.error(error.message);
+        return res.status(404).json({ error: error.message });
+    }
+})
 
 app.get("/hello", (req, res) => {
     res.status(200).send("hola desde node js XD")
