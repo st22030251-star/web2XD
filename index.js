@@ -193,8 +193,8 @@ app.post("/send", async (req, res) => {
 
 app.post("/base/create", async (req, res) => {
     try {
-        await baseModel.create(req.body);
-        return res.status(201).json({ message: "Base created" })
+        const result = await baseModel.create(req.body);
+        return res.status(201).json({ message: "Base created", data: result  })
     }
     catch (error) {
         console.error(error.message);
@@ -202,7 +202,7 @@ app.post("/base/create", async (req, res) => {
     }
 })
 
-app.get("base/getall", async (req, res) => {
+app.get("/base/getall", async (req, res) => {
     try {
         const bases = await baseModel.find();
         return res.status(200).json({
