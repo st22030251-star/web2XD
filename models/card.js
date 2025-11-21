@@ -14,6 +14,10 @@ const cardSchema = new mongoose.Schema({
     description: {
         type: String,
         trim: true
+    },
+    like: {
+        type: Boolean,
+        default: true,
     }
 }, {
     timestamps: true
